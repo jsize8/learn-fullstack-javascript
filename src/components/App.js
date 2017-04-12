@@ -3,6 +3,12 @@ import Header from './Header';
 
 class App extends React.Component {
   state = { pageHeader: 'Naming Contests' };
+  componentDidMount() {
+    //timers, listeners
+  };
+  componentWillUnmount() {
+    //clean timers, listeners
+  };
   render() {
     return (
       <div className="App">
