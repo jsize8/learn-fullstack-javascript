@@ -1,9 +1,9 @@
 import config from './config';
-import express from 'express';
 import apiRouter from './api';
 import sassMiddleware from 'node-sass-middleware';
 import path from 'path';
 
+import express from 'express';
 const server = express();
 
 server.use(sassMiddleware({
@@ -17,17 +17,18 @@ import serverRender from './serverRender';
 
 server.get('/', (req, res) => {
   serverRender()
-    .then(content => {
+    .then(({ initialMarkup, initialData }) => {
       res.render('index', {
-        content
+        initialMarkup,
+        initialData
       });
     })
-    .catch(console.error)
+    .catch(console.error);
 });
 
-server.use('/api', apiRouter)
+server.use('/api', apiRouter);
 server.use(express.static('public'));
 
 server.listen(config.port, config.host, () => {
-  console.info('Express listening on port ', config.port);
+  console.info('Express listening on port', config.port);
 });
